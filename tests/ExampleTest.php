@@ -1,6 +1,6 @@
 <?php
 
-namespace WoSjo\:package_name\Test;
+namespace ConceptCore\Tesseract\Test;
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace WoSjo\:package_name;
+namespace ConceptCore\Tesseract;
 
 use Illuminate\Support\Facades\Facade;
 
-class :package_nameFacade extends Facade
+class TesseractFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class :package_nameFacade extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return ':package_name';
+        return 'tesseract';
     }
 }

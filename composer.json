@@ -1,24 +1,18 @@
 {
-  "name": "wosjo/:package_name",
-  "description": ":package_description",
+  "name": "concept-core/tesseract-module",
+  "description": "Basic laravel tesseract module.",
   "keywords": [
-    "WoSjo",
-    ":package_name"
+    "concept-core",
+    "tesseract",
+    "laravel"
   ],
-  "homepage": "https://github.com/WoSjo/:package_name",
+  "homepage": "https://github.com/concept-core/tesseract-module",
   "license": "MIT",
   "authors": [
     {
       "name": "Wouter van Marrum",
-      "email": "wouter.van.marrum@concept-core.nl",
-      "homepage": "https://github.com/concept-core",
-      "role": "Developer"
-    },
-    {
-      "name": "Jordy van Domselaar",
-      "email": "jordy.van.domselaar@outlook.com",
-      "homepage": "https://github.com/jordyvandomselaar",
-      "role": "Developer"
+      "email": "wouter.van.marrum@protonmail.com",
+      "homepage": "https://github.com/concept-core"
     }
   ],
   "version": "0.0.1",
@@ -30,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "WoSjo\\:package_name\\": "src"
+      "ConceptCore\\Tesseract\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "WoSjo\\:package_name\\Test\\": "tests"
+      "ConceptCore\\Tesseract\\Test\\": "tests"
     }
   },
   "scripts": {
@@ -47,10 +41,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "WoSjo\\:package_name\\SkeletonServiceProvider"
+        "ConceptCore\\Tesseract\\TesseractServiceProvider"
       ],
       "aliases": {
-        ":package_anme": "WoSjo\\:package_name\\SkeletonFacade"
+        "tesseract": "ConceptCore\\Tesseract\\TesseractFacade"
       }
     }
   }

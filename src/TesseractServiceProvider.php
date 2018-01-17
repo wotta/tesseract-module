@@ -1,10 +1,10 @@
 <?php
 
-namespace WoSjo\:package_name;
+namespace ConceptCore\Tesseract;
 
 use Illuminate\Support\ServiceProvider;
 
-class :package_nameServiceProvider extends ServiceProvider
+class TesseractServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -27,7 +27,7 @@ class :package_nameServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/:package_name.php', ':package_name');
+        $this->mergeConfigFrom(__DIR__ . '/../config/Tesseract.php', 'Tesseract');
     }
 
     /**
@@ -36,7 +36,7 @@ class :package_nameServiceProvider extends ServiceProvider
     private function copyConfig()
     {
         $this->publishes([
-            __DIR__ . '/../config/:package_name.php' => config_path(':package_name.php'),
+            __DIR__ . '/../config/Tesseract.php' => config_path('Tesseract.php'),
         ], 'config');
         return $this;
     }
@@ -55,10 +55,10 @@ class :package_nameServiceProvider extends ServiceProvider
      */
     private function copyViews()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', ':package_name');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'Tesseract');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/:package_name'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/Tesseract'),
         ]);
         return $this;
     }
@@ -69,7 +69,7 @@ class :package_nameServiceProvider extends ServiceProvider
     private function copyAssets()
     {
         $this->publishes([
-            __DIR__.'/resources/assets' => public_path('vendor/:package_name'),
+            __DIR__ . '/resources/assets' => public_path('vendor/Tesseract'),
         ], 'public');
         return $this;
     }
@@ -79,7 +79,7 @@ class :package_nameServiceProvider extends ServiceProvider
      */
     private function copyTranslations()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/translations', ':package_name');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/translations', 'Tesseract');
         return $this;
     }
 
