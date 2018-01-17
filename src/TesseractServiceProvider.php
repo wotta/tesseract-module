@@ -27,7 +27,7 @@ class TesseractServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/Tesseract.php', 'Tesseract');
+        $this->mergeConfigFrom(__DIR__ . '/../config/tesseract.php', 'tesseract');
     }
 
     /**
@@ -36,7 +36,7 @@ class TesseractServiceProvider extends ServiceProvider
     private function copyConfig()
     {
         $this->publishes([
-            __DIR__ . '/../config/Tesseract.php' => config_path('Tesseract.php'),
+            __DIR__ . '/../config/tesseract.php' => config_path('tesseract.php'),
         ], 'config');
         return $this;
     }
