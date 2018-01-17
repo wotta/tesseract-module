@@ -13,12 +13,7 @@ class TesseractServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
 
-            $this->copyConfig()
-                ->copyRoutes()
-                ->copyViews()
-                ->copyAssets()
-                ->copyTranslations()
-                ->copyMigrations();
+            $this->copyConfig()->copyTranslations();
         }
     }
 
