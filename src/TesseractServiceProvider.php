@@ -12,7 +12,6 @@ class TesseractServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-
             $this->copyConfig()->copyTranslations();
         }
     }
@@ -22,7 +21,7 @@ class TesseractServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/tesseract.php', 'tesseract');
+        $this->mergeConfigFrom(__DIR__.'/../config/tesseract.php', 'tesseract');
     }
 
     /**
@@ -31,8 +30,9 @@ class TesseractServiceProvider extends ServiceProvider
     private function copyConfig()
     {
         $this->publishes([
-            __DIR__ . '/../config/tesseract.php' => config_path('tesseract.php'),
+            __DIR__.'/../config/tesseract.php' => config_path('tesseract.php'),
         ], 'config');
+
         return $this;
     }
 
@@ -41,7 +41,8 @@ class TesseractServiceProvider extends ServiceProvider
      */
     private function copyTranslations()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/translations', 'Tesseract');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/translations', 'Tesseract');
+
         return $this;
     }
 }
