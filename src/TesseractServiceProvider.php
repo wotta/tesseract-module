@@ -32,7 +32,7 @@ class TesseractServiceProvider extends ServiceProvider
     private function copyConfig(): TesseractServiceProvider
     {
         $this->publishes([
-            __DIR__ . '/../config/tesseract.php' => config_path('tesseract.php'),
+            __DIR__.'/../config/tesseract.php' => config_path('tesseract.php'),
         ], 'config');
 
         return $this;
@@ -40,7 +40,7 @@ class TesseractServiceProvider extends ServiceProvider
 
     private function copyTranslations(): TesseractServiceProvider
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/translations', 'Tesseract');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/translations', 'Tesseract');
 
         return $this;
     }
