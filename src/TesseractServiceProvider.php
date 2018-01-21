@@ -2,46 +2,46 @@
 
 namespace ConceptCore\Tesseract;
 
+use ConceptCore\Tesseract\Objects\Tesseract;
+use ConceptCore\Tesseract\Interfaces\Tesseract as TesseractInterface;
 use Illuminate\Support\ServiceProvider;
+use thiagoalessio\TesseractOCR\TesseractOCR;
 
 class TesseractServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-
             $this->copyConfig()->copyTranslations();
         }
     }
 
-    /**
-     * Register the application services.
-     */
     public function register(): void
     {
+        $this->app->bind(TesseractInterface::class, Tesseract::class);
+        $this->app->bind('tesseract', Tesseract::class);
+        $this->app->when(Tesseract::class)
+            ->needs(TesseractOCR::class)
+            ->give(function (): TesseractOCR {
+                return new TesseractOCR('');
+            });
+
         $this->mergeConfigFrom(__DIR__ . '/../config/tesseract.php', 'tesseract');
     }
 
-    /**
-     * @return $this
-     */
-    private function copyConfig()
+    private function copyConfig(): TesseractServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/tesseract.php' => config_path('tesseract.php'),
         ], 'config');
+
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    private function copyTranslations()
+    private function copyTranslations(): TesseractServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__ . '/../resources/translations', 'Tesseract');
+
         return $this;
     }
 }
