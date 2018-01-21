@@ -2,10 +2,10 @@
 
 namespace ConceptCore\Tesseract\Objects;
 
-use ConceptCore\Tesseract\Interfaces\Tesseract as TesseractInterface;
 use ReflectionClass;
 use ReflectionProperty;
 use thiagoalessio\TesseractOCR\TesseractOCR;
+use ConceptCore\Tesseract\Interfaces\Tesseract as TesseractInterface;
 
 class Tesseract implements TesseractInterface
 {
@@ -30,7 +30,7 @@ class Tesseract implements TesseractInterface
 
     public function setImage(string $image): TesseractInterface
     {
-        if (!is_file($image)) {
+        if (! is_file($image)) {
             throw new \Exception('file not found');
         }
 
@@ -55,7 +55,7 @@ class Tesseract implements TesseractInterface
 
     public function __call(string $method, array $arguments): TesseractInterface
     {
-        if (!method_exists($this->tesseractOCR, $method)) {
+        if (! method_exists($this->tesseractOCR, $method)) {
             throw new \BadMethodCallException(
                 sprintf('Trying to call [%s] on %s', $method, 'TesseractOCR')
             );
