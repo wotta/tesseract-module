@@ -2,6 +2,7 @@
 
 namespace ConceptCore\Tesseract\Objects;
 
+use ConceptCore\Tesseract\Interfaces\Cache\Cache;
 use ReflectionClass;
 use ReflectionProperty;
 use thiagoalessio\TesseractOCR\TesseractOCR;
@@ -18,7 +19,10 @@ class Tesseract implements TesseractInterface
     /** @var ReflectionProperty */
     protected $imageProperty;
 
-    public function __construct(TesseractOCR $tesseractOCR)
+    /** @var Cache */
+    protected $cache;
+
+    public function __construct(TesseractOCR $tesseractOCR, Cache $cache)
     {
         $this->tesseractOCR = $tesseractOCR;
         $this->tesseractOCR->executable(config('tesseract.executable'));
@@ -26,6 +30,8 @@ class Tesseract implements TesseractInterface
         $this->reflectionClass = new ReflectionClass($tesseractOCR);
 
         $this->imageProperty = $this->getImagePropertyValue();
+
+        $this->cache = $cache;
     }
 
     public function setImage(string $image): TesseractInterface
