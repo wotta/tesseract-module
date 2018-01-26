@@ -36,7 +36,7 @@ class Cache implements CacheInterface
      */
     public function many(array $keys)
     {
-        return $this->storage->only($keys);
+        return $this->storage->only($keys)->toArray();
     }
 
     /**
@@ -93,7 +93,15 @@ class Cache implements CacheInterface
      */
     public function decrement($key, $value = 1)
     {
-        // TODO: Implement decrement() method.
+        if ($this->storage->has($key)) {
+            if (is_numeric($this->storage->get($key))) {
+                return $this->storage->get($key) - $value;
+            }
+
+            return false;
+        }
+
+        return false;
     }
 
     /**
@@ -117,6 +125,8 @@ class Cache implements CacheInterface
     public function forget($key)
     {
         $this->storage->forget($key);
+
+        return $this->storage->has($key);
     }
 
     /**
