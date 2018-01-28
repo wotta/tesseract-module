@@ -7,17 +7,28 @@ use Illuminate\Support\Collection;
 
 class Cache implements CacheInterface
 {
-    /** @var Collection */
-    protected $storage;
+    /** @var array */
+    public $storageArray = [];
 
-    public function __construct(Collection $collection)
+    /** @var Collection */
+    public $storage;
+
+    public function __construct()
     {
-        $this->storage = $collection;
+        $this->storage = collect($this->storageArray);
+    }
+
+    public function all(): array
+    {
+        return $this->storage->all();
+    }
+
+    public function has(string $key): bool
+    {
+        return $this->storage->has($key);
     }
 
     /**
-     * Retrieve an item from the cache by key.
-     *
      * @param  string|array $key
      * @return mixed
      */
@@ -27,10 +38,6 @@ class Cache implements CacheInterface
     }
 
     /**
-     * Retrieve multiple items from the cache by key.
-     *
-     * Items not found in the cache will have a null value.
-     *
      * @param  array $keys
      * @return array
      */
@@ -40,8 +47,6 @@ class Cache implements CacheInterface
     }
 
     /**
-     * Store an item in the cache for a given number of minutes.
-     *
      * @param  string $key
      * @param  mixed $value
      * @param  float|int $minutes
@@ -53,8 +58,6 @@ class Cache implements CacheInterface
     }
 
     /**
-     * Store multiple items in the cache for a given number of minutes.
-     *
      * @param  array $values
      * @param  float|int $minutes
      * @return void
@@ -65,8 +68,6 @@ class Cache implements CacheInterface
     }
 
     /**
-     * Increment the value of an item in the cache.
-     *
      * @param  string $key
      * @param  mixed $value
      * @return int|bool
@@ -85,8 +86,6 @@ class Cache implements CacheInterface
     }
 
     /**
-     * Decrement the value of an item in the cache.
-     *
      * @param  string $key
      * @param  mixed $value
      * @return int|bool
@@ -104,37 +103,19 @@ class Cache implements CacheInterface
         return false;
     }
 
-    /**
-     * Store an item in the cache indefinitely.
-     *
-     * @param  string $key
-     * @param  mixed $value
-     * @return void
-     */
-    public function forever($key, $value)
+    public function forever($key, $value): void
     {
-        $this->put($key, $value, 0);
+        $this->storage->put($key, $value);
     }
 
-    /**
-     * Remove an item from the cache.
-     *
-     * @param  string $key
-     * @return bool
-     */
-    public function forget($key)
+    public function forget($key): bool
     {
         $this->storage->forget($key);
 
         return $this->storage->has($key);
     }
 
-    /**
-     * Remove all items from the cache.
-     *
-     * @return bool
-     */
-    public function flush()
+    public function flush(): bool
     {
         $this->storage = new Collection();
 
@@ -145,22 +126,8 @@ class Cache implements CacheInterface
         return false;
     }
 
-    /**
-     * Get the cache key prefix.
-     *
-     * @return string
-     */
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return '';
-    }
-
-    private function getValue(string $key, callable $callback)
-    {
-        if ($this->storage->has($key)) {
-            return $callback;
-        }
-
-        return null;
     }
 }
