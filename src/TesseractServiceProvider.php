@@ -2,7 +2,8 @@
 
 namespace ConceptCore\Tesseract;
 
-use ConceptCore\Tesseract\Objects\Cache\Cache;
+use Cache;
+use ConceptCore\Tesseract\Objects\Cache\Cache as CacheObject;
 use Illuminate\Support\ServiceProvider;
 use ConceptCore\Tesseract\Objects\Tesseract;
 use thiagoalessio\TesseractOCR\TesseractOCR;
@@ -13,6 +14,10 @@ class TesseractServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        Cache::extend('tesseractCache', function ($app) {
+            return Cache::repository(new CacheObject());
+        });
+
         if ($this->app->runningInConsole()) {
             $this->copyConfig()->copyTranslations();
         }
@@ -27,7 +32,9 @@ class TesseractServiceProvider extends ServiceProvider
             ->give(function (): TesseractOCR {
                 return new TesseractOCR('');
             });
-        $this->app->bind(CacheInterface::class, Cache::class);
+
+        $this->app->bind(CacheInterface::class, CacheObject::class);
+        $this->app->bind('tesseractCache', CacheObject::class);
 
         $this->mergeConfigFrom(__DIR__.'/../config/tesseract.php', 'tesseract');
     }
