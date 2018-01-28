@@ -3,12 +3,12 @@
 namespace ConceptCore\Tesseract;
 
 use Cache;
-use ConceptCore\Tesseract\Objects\Cache\Cache as CacheObject;
 use Illuminate\Support\ServiceProvider;
 use ConceptCore\Tesseract\Objects\Tesseract;
 use thiagoalessio\TesseractOCR\TesseractOCR;
-use ConceptCore\Tesseract\Interfaces\Tesseract as TesseractInterface;
+use ConceptCore\Tesseract\Objects\Cache\Cache as CacheObject;
 use ConceptCore\Tesseract\Interfaces\Cache\Cache as CacheInterface;
+use ConceptCore\Tesseract\Interfaces\Tesseract as TesseractInterface;
 
 class TesseractServiceProvider extends ServiceProvider
 {
@@ -42,7 +42,7 @@ class TesseractServiceProvider extends ServiceProvider
     private function copyConfig(): self
     {
         $this->publishes([
-            __DIR__ . '/../config/tesseract.php' => config_path('tesseract.php'),
+            __DIR__.'/../config/tesseract.php' => config_path('tesseract.php'),
         ], 'config');
 
         return $this;
@@ -50,7 +50,7 @@ class TesseractServiceProvider extends ServiceProvider
 
     private function copyTranslations(): self
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/translations', 'Tesseract');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/translations', 'Tesseract');
 
         return $this;
     }
