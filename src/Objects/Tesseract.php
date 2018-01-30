@@ -2,7 +2,6 @@
 
 namespace ConceptCore\Tesseract\Objects;
 
-use ConceptCore\Tesseract\Interfaces\Cache\Cache;
 use ReflectionClass;
 use ReflectionProperty;
 use thiagoalessio\TesseractOCR\TesseractOCR;
